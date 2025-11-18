@@ -14,7 +14,16 @@
     <!-- Icons (Bootstrap Icons) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
+    <!-- Google Font (fallback similar to Tango BT) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&display=swap">
+
     <style>
+        :root {
+            --nila-blue: #009fe8;
+            --nila-blue-soft: #e6f5ff;
+            --nila-blue-dark: #004c97;
+        }
+
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
@@ -25,10 +34,21 @@
             letter-spacing: 1px;
         }
 
+        .navbar-brand img {
+            height: 40px;
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .brand-title {
+            font-family: "Tango BT", "Baloo 2", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
         /* Hero */
         .hero-section {
             padding: 100px 0 80px;
-            background: linear-gradient(135deg, #fff7e6, #ffe4c4);
+            background: radial-gradient(circle at top left, var(--nila-blue-soft), #ffffff),
+                        radial-gradient(circle at bottom right, #ccecff, #f7fbff);
         }
 
         .hero-title {
@@ -36,9 +56,13 @@
             font-weight: 800;
         }
 
+        .hero-title-brand {
+            font-family: "Tango BT", "Baloo 2", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
         .hero-badge {
-            background-color: #ffb347;
-            color: #4a2800;
+            background-color: var(--nila-blue);
+            color: #ffffff;
             font-weight: 600;
             border-radius: 999px;
             padding: 6px 16px;
@@ -75,7 +99,7 @@
 
         .product-card {
             border-radius: 0.75rem;
-            border: 1px solid #f1e0ce;
+            border: 1px solid #d2e8ff;
             transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
 
@@ -100,17 +124,43 @@
 
         /* Footer */
         .footer {
-            background-color: #2b1a12;
-            color: #fff0d9;
+            background-color: var(--nila-blue-dark);
+            color: #eaf4ff;
         }
 
         .footer a {
-            color: #ffd8a6;
+            color: #cfe6ff;
             text-decoration: none;
         }
 
         .footer a:hover {
             text-decoration: underline;
+        }
+
+        /* Button colors override */
+        .btn-primary {
+            background-color: var(--nila-blue);
+            border-color: var(--nila-blue);
+        }
+        .btn-primary:hover {
+            background-color: var(--nila-blue-dark);
+            border-color: var(--nila-blue-dark);
+        }
+        .btn-outline-primary {
+            color: var(--nila-blue);
+            border-color: var(--nila-blue);
+        }
+        .btn-outline-primary:hover {
+            color: #ffffff;
+            background-color: var(--nila-blue);
+            border-color: var(--nila-blue);
+        }
+
+        a {
+            color: var(--nila-blue-dark);
+        }
+        a:hover {
+            color: var(--nila-blue);
         }
     </style>
 </head>
@@ -120,8 +170,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="#home">
-            <i class="bi bi-cake2 me-2 fs-4 text-warning"></i>
-            <span>Nila Bake House</span>
+            <!-- Logo image -->
+            <img src="assets/images/nila-logo.png" alt="Nila Bake House Logo">
+            <span class="brand-title">Nila Bake House</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -147,17 +198,19 @@
                     <i class="bi bi-star-fill"></i>
                     Freshly baked, made with love
                 </div>
-                <h1 class="hero-title mb-3">Welcome to <span class="text-warning">Nila Bake House</span></h1>
+                <h1 class="hero-title mb-3">
+                    Welcome to <span class="text-primary hero-title-brand">Nila Bake House</span>
+                </h1>
                 <p class="lead mb-4">
                     Homemade cakes, pastries, and snacks baked fresh every day.  
                     Place your order directly on WhatsApp and enjoy sweet moments with your family and friends.
                 </p>
                 <div class="d-flex flex-wrap gap-2">
-                    <a href="#order" class="btn btn-warning px-4">
+                    <a href="#order" class="btn btn-primary px-4">
                         <i class="bi bi-bag-heart me-1"></i> Place an Order
                     </a>
                     <!-- WhatsApp quick chat button in hero -->
-                    <a href="https://wa.me/9715XXXXXXXXX" target="_blank" class="btn btn-outline-success px-4">
+                    <a href="https://wa.me/917593836666" target="_blank" class="btn btn-outline-primary px-4">
                         <i class="bi bi-whatsapp me-1"></i> Chat on WhatsApp
                     </a>
                 </div>
@@ -167,9 +220,9 @@
                 </div>
             </div>
             <div class="col-md-6 text-center">
-                <!-- You can replace this image URL with your own image file -->
-                <img src="https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?auto=compress&cs=tinysrgb&w=800"
-                     alt="Fresh Cakes" class="img-fluid hero-image rounded-4 shadow-sm">
+                <!-- Replace this with your own hero cake image if you have one -->
+                <img src="assets/cake/black-forest.png"
+                     alt="Signature Cake" class="img-fluid hero-image rounded-4 shadow-sm bg-white">
             </div>
         </div>
     </div>
@@ -181,14 +234,36 @@
         <div class="text-center mb-4">
             <h2 class="section-title">Our Special Menu</h2>
             <p class="section-subtitle mx-auto">
-                Some of our most loved items. You can mention any of these in your order or ask for custom flavours.
+                Some of our most loved cakes and bakes. Mention any of these in your order or ask for custom flavours.
             </p>
         </div>
         <div class="row g-4">
-            <!-- Item 1 -->
+            <!-- 1 -->
             <div class="col-md-4">
                 <div class="card product-card h-100">
-                    <img src="https://images.pexels.com/photos/2915287/pexels-photo-2915287.jpeg?auto=compress&cs=tinysrgb&w=800" class="card-img-top" alt="Chocolate Truffle Cake">
+                    <img src="assets/cake/black-forest.png" class="card-img-top" alt="Black Forest Cake">
+                    <div class="card-body">
+                        <h5 class="card-title">Black Forest Cake</h5>
+                        <p class="card-text small text-muted mb-2">Classic chocolate sponge with cherries and cream.</p>
+                        <p class="fw-semibold mb-0">From ₹749 / 1kg</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 2 -->
+            <div class="col-md-4">
+                <div class="card product-card h-100">
+                    <img src="assets/cake/white-forest.png" class="card-img-top" alt="White Forest Cake">
+                    <div class="card-body">
+                        <h5 class="card-title">White Forest Cake</h5>
+                        <p class="card-text small text-muted mb-2">Vanilla sponge with whipped cream and cherries.</p>
+                        <p class="fw-semibold mb-0">From ₹769 / 1kg</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 3 -->
+            <div class="col-md-4">
+                <div class="card product-card h-100">
+                    <img src="assets/cake/chocolate-truffle.png" class="card-img-top" alt="Chocolate Truffle Cake">
                     <div class="card-body">
                         <h5 class="card-title">Chocolate Truffle Cake</h5>
                         <p class="card-text small text-muted mb-2">Rich dark chocolate sponge with creamy ganache.</p>
@@ -196,10 +271,32 @@
                     </div>
                 </div>
             </div>
-            <!-- Item 2 -->
+            <!-- 4 -->
             <div class="col-md-4">
                 <div class="card product-card h-100">
-                    <img src="https://images.pexels.com/photos/2915280/pexels-photo-2915280.jpeg?auto=compress&cs=tinysrgb&w=800" class="card-img-top" alt="Fresh Fruit Cake">
+                    <img src="assets/cake/red-velvet.png" class="card-img-top" alt="Red Velvet Cake">
+                    <div class="card-body">
+                        <h5 class="card-title">Red Velvet Cake</h5>
+                        <p class="card-text small text-muted mb-2">Soft red velvet layers with cream cheese frosting.</p>
+                        <p class="fw-semibold mb-0">From ₹899 / 1kg</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 5 -->
+            <div class="col-md-4">
+                <div class="card product-card h-100">
+                    <img src="assets/cake/butterscotch.png" class="card-img-top" alt="Butterscotch Cake">
+                    <div class="card-body">
+                        <h5 class="card-title">Butterscotch Delight</h5>
+                        <p class="card-text small text-muted mb-2">Crunchy butterscotch with caramel cream.</p>
+                        <p class="fw-semibold mb-0">From ₹749 / 1kg</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 6 -->
+            <div class="col-md-4">
+                <div class="card product-card h-100">
+                    <img src="assets/cake/fresh-fruit.png" class="card-img-top" alt="Fresh Fruit Cake">
                     <div class="card-body">
                         <h5 class="card-title">Fresh Fruit Cake</h5>
                         <p class="card-text small text-muted mb-2">Light vanilla sponge topped with seasonal fruits.</p>
@@ -207,14 +304,36 @@
                     </div>
                 </div>
             </div>
-            <!-- Item 3 -->
+            <!-- 7 -->
             <div class="col-md-4">
                 <div class="card product-card h-100">
-                    <img src="https://images.pexels.com/photos/4109991/pexels-photo-4109991.jpeg?auto=compress&cs=tinysrgb&w=800" class="card-img-top" alt="Cupcakes & Snacks">
+                    <img src="assets/cake/pineapple.png" class="card-img-top" alt="Pineapple Cake">
                     <div class="card-body">
-                        <h5 class="card-title">Cupcakes & Snacks</h5>
-                        <p class="card-text small text-muted mb-2">Cupcakes, puffs, rolls and more for your small gatherings.</p>
-                        <p class="fw-semibold mb-0">From ₹30 / piece</p>
+                        <h5 class="card-title">Pineapple Classic</h5>
+                        <p class="card-text small text-muted mb-2">Soft sponge layered with pineapple and cream.</p>
+                        <p class="fw-semibold mb-0">From ₹699 / 1kg</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 8 -->
+            <div class="col-md-4">
+                <div class="card product-card h-100">
+                    <img src="assets/cake/blueberry.png" class="card-img-top" alt="Blueberry Cake">
+                    <div class="card-body">
+                        <h5 class="card-title">Blueberry Bliss</h5>
+                        <p class="card-text small text-muted mb-2">Vanilla cake topped with blueberry compote.</p>
+                        <p class="fw-semibold mb-0">From ₹899 / 1kg</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 9 -->
+            <div class="col-md-4">
+                <div class="card product-card h-100">
+                    <img src="assets/cake/cupcakes-assorted.png" class="card-img-top" alt="Assorted Cupcakes">
+                    <div class="card-body">
+                        <h5 class="card-title">Assorted Cupcakes</h5>
+                        <p class="card-text small text-muted mb-2">Mix of chocolate, vanilla and red velvet cupcakes.</p>
+                        <p class="fw-semibold mb-0">From ₹35 / piece</p>
                     </div>
                 </div>
             </div>
@@ -246,11 +365,15 @@
                         <label for="orderItem" class="form-label">What would you like to order?</label>
                         <select id="orderItem" class="form-select" required>
                             <option value="" selected disabled>Select an item</option>
-                            <option value="Chocolate Truffle Cake">Chocolate Truffle Cake</option>
-                            <option value="Fresh Fruit Cake">Fresh Fruit Cake</option>
                             <option value="Black Forest Cake">Black Forest Cake</option>
-                            <option value="Cupcakes Assorted Box">Cupcakes – Assorted Box</option>
-                            <option value="Snacks Platter">Snacks Platter</option>
+                            <option value="White Forest Cake">White Forest Cake</option>
+                            <option value="Chocolate Truffle Cake">Chocolate Truffle Cake</option>
+                            <option value="Red Velvet Cake">Red Velvet Cake</option>
+                            <option value="Butterscotch Delight">Butterscotch Delight</option>
+                            <option value="Fresh Fruit Cake">Fresh Fruit Cake</option>
+                            <option value="Pineapple Classic">Pineapple Classic</option>
+                            <option value="Blueberry Bliss">Blueberry Bliss</option>
+                            <option value="Assorted Cupcakes">Assorted Cupcakes</option>
                             <option value="Custom Cake">Custom Cake (theme / photo etc.)</option>
                         </select>
                     </div>
@@ -266,7 +389,7 @@
                         <label for="extraNotes" class="form-label">Special Instructions (optional)</label>
                         <textarea id="extraNotes" class="form-control" rows="3" placeholder="Write flavour, message on cake, design idea, etc."></textarea>
                     </div>
-                    <button type="submit" class="btn btn-warning px-4">
+                    <button type="submit" class="btn btn-primary px-4">
                         <i class="bi bi-whatsapp me-1"></i> Send Order on WhatsApp
                     </button>
                     <p class="small text-muted mt-2">
@@ -312,28 +435,28 @@
                 <div class="row g-3">
                     <div class="col-6">
                         <div class="border rounded-4 p-3 h-100 text-center">
-                            <i class="bi bi-emoji-smile fs-1 text-warning mb-2"></i>
+                            <i class="bi bi-emoji-smile fs-1 text-primary mb-2"></i>
                             <h6 class="fw-semibold">Homemade Taste</h6>
                             <p class="small text-muted mb-0">Recipes inspired by home-style baking.</p>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="border rounded-4 p-3 h-100 text-center">
-                            <i class="bi bi-basket2 fs-1 text-warning mb-2"></i>
+                            <i class="bi bi-basket2 fs-1 text-primary mb-2"></i>
                             <h6 class="fw-semibold">Fresh Every Day</h6>
                             <p class="small text-muted mb-0">Baked in small batches for better freshness.</p>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="border rounded-4 p-3 h-100 text-center">
-                            <i class="bi bi-calendar-heart fs-1 text-warning mb-2"></i>
+                            <i class="bi bi-calendar-heart fs-1 text-primary mb-2"></i>
                             <h6 class="fw-semibold">Custom Cakes</h6>
                             <p class="small text-muted mb-0">Personalised designs for your special days.</p>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="border rounded-4 p-3 h-100 text-center">
-                            <i class="bi bi-geo-alt fs-1 text-warning mb-2"></i>
+                            <i class="bi bi-geo-alt fs-1 text-primary mb-2"></i>
                             <h6 class="fw-semibold">Local Bakery</h6>
                             <p class="small text-muted mb-0">Serving the neighbourhood with care and warmth.</p>
                         </div>
@@ -357,8 +480,14 @@
             <div class="col-md-6">
                 <div class="bg-white p-4 rounded-4 shadow-sm h-100">
                     <h5 class="mb-3"><i class="bi bi-telephone me-2"></i>Contact</h5>
-                    <p class="mb-1"><strong>Phone / WhatsApp:</strong> <a href="https://wa.me/9715XXXXXXXXX" target="_blank">+971 5X XXX XXXX</a></p>
-                    <p class="mb-1"><strong>Email:</strong> <a href="mailto:nilabakehouse@example.com">nilabakehouse@example.com</a></p>
+                    <p class="mb-1">
+                        <strong>Phone / WhatsApp:</strong>
+                        <a href="https://wa.me/917593836666" target="_blank">+91 75938 36666</a>
+                    </p>
+                    <p class="mb-1">
+                        <strong>Email:</strong>
+                        <a href="mailto:nilabakehousekoppam@gmail.com">nilabakehousekoppam@gmail.com</a>
+                    </p>
                     <p class="mb-0"><strong>Instagram:</strong> @nila_bake_house</p>
 
                     <hr class="my-4">
@@ -366,7 +495,7 @@
                     <h5 class="mb-3"><i class="bi bi-geo-alt me-2"></i>Address</h5>
                     <p class="mb-1">Nila Bake House</p>
                     <p class="mb-1">Your Area / Street Name</p>
-                    <p class="mb-1">Your Town, Your District</p>
+                    <p class="mb-1">Koppam, [District]</p>
                     <p class="mb-0">PIN / Postal Code</p>
 
                     <hr class="my-4">
@@ -396,7 +525,7 @@
 
 <!-- Floating WhatsApp Button -->
 <div class="whatsapp-float">
-    <a href="https://wa.me/9715XXXXXXXXX" target="_blank" class="btn btn-success shadow-lg">
+    <a href="https://wa.me/917593836666" target="_blank" class="btn btn-success shadow-lg">
         <i class="bi bi-whatsapp me-1"></i> Chat with us
     </a>
 </div>
@@ -421,8 +550,8 @@
             const pickupTime = document.getElementById('pickupTime').value.trim();
             const notes = document.getElementById('extraNotes').value.trim();
 
-            // 👉 Replace with your bakery WhatsApp number (no +, no spaces)
-            const bakeryWhatsApp = "9715XXXXXXXXX";
+            // Bakery WhatsApp number (no +, no spaces)
+            const bakeryWhatsApp = "917593836666";
 
             let message = `New order request from ${name}%0A`;
             message += `Phone: ${phone}%0A`;
@@ -443,9 +572,9 @@
 </script>
 
 <!--
-IMPORTANT:
-1. Change all "9715XXXXXXXXX" to the real WhatsApp number of Nila Bake House.
-2. Change email and address as per your friend's bakery details.
+REMINDERS:
+1. Put your logo at: assets/images/nila-logo.png
+2. Put cake images in: assets/cake/ as named in the img src tags.
 -->
 
 </body>
