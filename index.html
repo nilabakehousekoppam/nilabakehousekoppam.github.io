@@ -74,7 +74,12 @@
         .hero-image {
             max-width: 420px;
         }
-
+        @media (max-width: 768px) {
+            .hero-image {
+                max-width: 260px;   /* reduce size on mobile */
+                margin-top: 20px;
+            }
+        }
         /* Sections */
         section {
             scroll-margin-top: 90px; /* for smooth anchor scrolling */
