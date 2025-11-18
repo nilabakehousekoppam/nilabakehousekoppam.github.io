@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Nila Bake House – Fresh Cakes & Bakes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- SEO -->
+    <meta name="description" content="Nila Bake House – Freshly baked cakes, pastries, and snacks. Order online and chat on WhatsApp.">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Icons (Bootstrap Icons) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        /* Navbar */
+        .navbar-brand span {
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* Hero */
+        .hero-section {
+            padding: 100px 0 80px;
+            background: linear-gradient(135deg, #fff7e6, #ffe4c4);
+        }
+
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+        }
+
+        .hero-badge {
+            background-color: #ffb347;
+            color: #4a2800;
+            font-weight: 600;
+            border-radius: 999px;
+            padding: 6px 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-image {
+            max-width: 420px;
+        }
+
+        /* Sections */
+        section {
+            scroll-margin-top: 90px; /* for smooth anchor scrolling */
+        }
+
+        .section-title {
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            color: #777;
+            max-width: 600px;
+        }
+
+        /* Cards */
+        .product-card img {
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .product-card {
+            border-radius: 0.75rem;
+            border: 1px solid #f1e0ce;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 18px;
+            right: 18px;
+            z-index: 1000;
+        }
+
+        .whatsapp-float .btn {
+            border-radius: 999px;
+            padding: 12px 18px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #2b1a12;
+            color: #fff0d9;
+        }
+
+        .footer a {
+            color: #ffd8a6;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#home">
+            <i class="bi bi-cake2 me-2 fs-4 text-warning"></i>
+            <span>Nila Bake House</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+                <li class="nav-item"><a class="nav-link" href="#order">Order</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="hero-section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-md-6">
+                <div class="hero-badge mb-3">
+                    <i class="bi bi-star-fill"></i>
+                    Freshly baked, made with love
+                </div>
+                <h1 class="hero-title mb-3">Welcome to <span class="text-warning">Nila Bake House</span></h1>
+                <p class="lead mb-4">
+                    Homemade cakes, pastries, and snacks baked fresh every day.  
+                    Place your order directly on WhatsApp and enjoy sweet moments with your family and friends.
+                </p>
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="#order" class="btn btn-warning px-4">
+                        <i class="bi bi-bag-heart me-1"></i> Place an Order
+                    </a>
+                    <!-- WhatsApp quick chat button in hero -->
+                    <a href="https://wa.me/9715XXXXXXXXX" target="_blank" class="btn btn-outline-success px-4">
+                        <i class="bi bi-whatsapp me-1"></i> Chat on WhatsApp
+                    </a>
+                </div>
+                <div class="mt-4 small text-muted">
+                    <i class="bi bi-clock-history me-1"></i>
+                    Pre-order at least 1 day in advance for custom cakes.
+                </div>
+            </div>
+            <div class="col-md-6 text-center">
+                <!-- You can replace this image URL with your own image file -->
+                <img src="https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?auto=compress&cs=tinysrgb&w=800"
+                     alt="Fresh Cakes" class="img-fluid hero-image rounded-4 shadow-sm">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Menu Section -->
+<section id="menu" class="py-5">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h2 class="section-title">Our Special Menu</h2>
+            <p class="section-subtitle mx-auto">
+                Some of our most loved items. You can mention any of these in your order or ask for custom flavours.
+            </p>
+        </div>
+        <div class="row g-4">
+            <!-- Item 1 -->
+            <div class="col-md-4">
+                <div class="card product-card h-100">
+                    <img src="https://images.pexels.com/photos/2915287/pexels-photo-2915287.jpeg?auto=compress&cs=tinysrgb&w=800" class="card-img-top" alt="Chocolate Truffle Cake">
+                    <div class="card-body">
+                        <h5 class="card-title">Chocolate Truffle Cake</h5>
+                        <p class="card-text small text-muted mb-2">Rich dark chocolate sponge with creamy ganache.</p>
+                        <p class="fw-semibold mb-0">From ₹799 / 1kg</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Item 2 -->
+            <div class="col-md-4">
+                <div class="card product-card h-100">
+                    <img src="https://images.pexels.com/photos/2915280/pexels-photo-2915280.jpeg?auto=compress&cs=tinysrgb&w=800" class="card-img-top" alt="Fresh Fruit Cake">
+                    <div class="card-body">
+                        <h5 class="card-title">Fresh Fruit Cake</h5>
+                        <p class="card-text small text-muted mb-2">Light vanilla sponge topped with seasonal fruits.</p>
+                        <p class="fw-semibold mb-0">From ₹849 / 1kg</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Item 3 -->
+            <div class="col-md-4">
+                <div class="card product-card h-100">
+                    <img src="https://images.pexels.com/photos/4109991/pexels-photo-4109991.jpeg?auto=compress&cs=tinysrgb&w=800" class="card-img-top" alt="Cupcakes & Snacks">
+                    <div class="card-body">
+                        <h5 class="card-title">Cupcakes & Snacks</h5>
+                        <p class="card-text small text-muted mb-2">Cupcakes, puffs, rolls and more for your small gatherings.</p>
+                        <p class="fw-semibold mb-0">From ₹30 / piece</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Order Section -->
+<section id="order" class="py-5 bg-light">
+    <div class="container">
+        <div class="row g-4 align-items-start">
+            <div class="col-lg-6">
+                <h2 class="section-title mb-3">Place Your Order</h2>
+                <p class="section-subtitle">
+                    Fill this form and we’ll prepare a WhatsApp message with all the details.  
+                    You can review and send it directly to Nila Bake House.
+                </p>
+
+                <form id="orderForm" class="mt-3">
+                    <div class="mb-3">
+                        <label for="customerName" class="form-label">Your Name</label>
+                        <input type="text" class="form-control" id="customerName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="customerPhone" class="form-label">Your Phone Number</label>
+                        <input type="tel" class="form-control" id="customerPhone" placeholder="For order confirmation" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="orderItem" class="form-label">What would you like to order?</label>
+                        <select id="orderItem" class="form-select" required>
+                            <option value="" selected disabled>Select an item</option>
+                            <option value="Chocolate Truffle Cake">Chocolate Truffle Cake</option>
+                            <option value="Fresh Fruit Cake">Fresh Fruit Cake</option>
+                            <option value="Black Forest Cake">Black Forest Cake</option>
+                            <option value="Cupcakes Assorted Box">Cupcakes – Assorted Box</option>
+                            <option value="Snacks Platter">Snacks Platter</option>
+                            <option value="Custom Cake">Custom Cake (theme / photo etc.)</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantity / Weight</label>
+                        <input type="text" class="form-control" id="quantity" placeholder="e.g., 1kg, 2 dozen cupcakes" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pickupTime" class="form-label">Preferred Date & Time</label>
+                        <input type="text" class="form-control" id="pickupTime" placeholder="e.g., 25 Nov, evening 5–6 PM">
+                    </div>
+                    <div class="mb-3">
+                        <label for="extraNotes" class="form-label">Special Instructions (optional)</label>
+                        <textarea id="extraNotes" class="form-control" rows="3" placeholder="Write flavour, message on cake, design idea, etc."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-warning px-4">
+                        <i class="bi bi-whatsapp me-1"></i> Send Order on WhatsApp
+                    </button>
+                    <p class="small text-muted mt-2">
+                        You will be redirected to WhatsApp with a pre-filled message. Please review and send it.
+                    </p>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <div class="bg-white p-4 rounded-4 shadow-sm">
+                    <h5 class="mb-3"><i class="bi bi-info-circle me-2"></i>Order Guidelines</h5>
+                    <ul class="mb-0 small">
+                        <li>Custom cakes: please order at least <strong>24–48 hours</strong> in advance.</li>
+                        <li>Same-day orders are subject to availability.</li>
+                        <li>Please mention any <strong>allergies</strong> (nuts, eggs, etc.) in the instructions.</li>
+                        <li>Delivery options depend on location, otherwise pick-up from shop.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-5">
+    <div class="container">
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-6">
+                <h2 class="section-title mb-3">About Nila Bake House</h2>
+                <p class="section-subtitle">
+                    Nila Bake House is a cozy home-town bakery started with a simple idea –  
+                    to bring fresh, homemade taste to every celebration.
+                </p>
+                <p>
+                    From birthday cakes and anniversary specials to festival treats and tea-time snacks,  
+                    every item is baked in small batches using quality ingredients and a lot of love.
+                </p>
+                <p>
+                    We also take custom orders for theme cakes, kids' birthday cakes, and bulk snack orders for  
+                    offices, schools, and family functions.
+                </p>
+            </div>
+            <div class="col-lg-6">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="border rounded-4 p-3 h-100 text-center">
+                            <i class="bi bi-emoji-smile fs-1 text-warning mb-2"></i>
+                            <h6 class="fw-semibold">Homemade Taste</h6>
+                            <p class="small text-muted mb-0">Recipes inspired by home-style baking.</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="border rounded-4 p-3 h-100 text-center">
+                            <i class="bi bi-basket2 fs-1 text-warning mb-2"></i>
+                            <h6 class="fw-semibold">Fresh Every Day</h6>
+                            <p class="small text-muted mb-0">Baked in small batches for better freshness.</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="border rounded-4 p-3 h-100 text-center">
+                            <i class="bi bi-calendar-heart fs-1 text-warning mb-2"></i>
+                            <h6 class="fw-semibold">Custom Cakes</h6>
+                            <p class="small text-muted mb-0">Personalised designs for your special days.</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="border rounded-4 p-3 h-100 text-center">
+                            <i class="bi bi-geo-alt fs-1 text-warning mb-2"></i>
+                            <h6 class="fw-semibold">Local Bakery</h6>
+                            <p class="small text-muted mb-0">Serving the neighbourhood with care and warmth.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h2 class="section-title">Contact & Location</h2>
+            <p class="section-subtitle mx-auto">
+                Reach out on WhatsApp for any queries, custom designs, or bulk orders.
+            </p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-6">
+                <div class="bg-white p-4 rounded-4 shadow-sm h-100">
+                    <h5 class="mb-3"><i class="bi bi-telephone me-2"></i>Contact</h5>
+                    <p class="mb-1"><strong>Phone / WhatsApp:</strong> <a href="https://wa.me/9715XXXXXXXXX" target="_blank">+971 5X XXX XXXX</a></p>
+                    <p class="mb-1"><strong>Email:</strong> <a href="mailto:nilabakehouse@example.com">nilabakehouse@example.com</a></p>
+                    <p class="mb-0"><strong>Instagram:</strong> @nila_bake_house</p>
+
+                    <hr class="my-4">
+
+                    <h5 class="mb-3"><i class="bi bi-geo-alt me-2"></i>Address</h5>
+                    <p class="mb-1">Nila Bake House</p>
+                    <p class="mb-1">Your Area / Street Name</p>
+                    <p class="mb-1">Your Town, Your District</p>
+                    <p class="mb-0">PIN / Postal Code</p>
+
+                    <hr class="my-4">
+
+                    <h6 class="mb-1">Timings</h6>
+                    <p class="mb-0 small text-muted">
+                        Mon – Sun: 9:00 AM – 9:00 PM  
+                        (Custom cake orders accepted for early morning deliveries)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer py-3">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <p class="mb-1 mb-md-0 small">
+            © <span id="year"></span> Nila Bake House. All rights reserved.
+        </p>
+        <p class="mb-0 small">
+            Made with <i class="bi bi-heart-fill text-danger"></i> for our home town.
+        </p>
+    </div>
+</footer>
+
+<!-- Floating WhatsApp Button -->
+<div class="whatsapp-float">
+    <a href="https://wa.me/9715XXXXXXXXX" target="_blank" class="btn btn-success shadow-lg">
+        <i class="bi bi-whatsapp me-1"></i> Chat with us
+    </a>
+</div>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Update footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Order form -> open WhatsApp with pre-filled message
+    const orderForm = document.getElementById('orderForm');
+    if (orderForm) {
+        orderForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('customerName').value.trim();
+            const phone = document.getElementById('customerPhone').value.trim();
+            const item = document.getElementById('orderItem').value;
+            const quantity = document.getElementById('quantity').value.trim();
+            const pickupTime = document.getElementById('pickupTime').value.trim();
+            const notes = document.getElementById('extraNotes').value.trim();
+
+            // 👉 Replace with your bakery WhatsApp number (no +, no spaces)
+            const bakeryWhatsApp = "9715XXXXXXXXX";
+
+            let message = `New order request from ${name}%0A`;
+            message += `Phone: ${phone}%0A`;
+            message += `Item: ${item}%0A`;
+            message += `Quantity/Weight: ${quantity}%0A`;
+            if (pickupTime) {
+                message += `Preferred Date & Time: ${pickupTime}%0A`;
+            }
+            if (notes) {
+                message += `Special Instructions: ${notes}%0A`;
+            }
+            message += `%0APlease confirm availability and price.`;
+
+            const url = `https://wa.me/${bakeryWhatsApp}?text=${message}`;
+            window.open(url, "_blank");
+        });
+    }
+</script>
+
+<!--
+IMPORTANT:
+1. Change all "9715XXXXXXXXX" to the real WhatsApp number of Nila Bake House.
+2. Change email and address as per your friend's bakery details.
+-->
+
+</body>
+</html>
