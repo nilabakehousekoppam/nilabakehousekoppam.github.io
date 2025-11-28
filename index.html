@@ -617,33 +617,51 @@
             const phone = document.getElementById('customerPhone').value.trim();
             const item = document.getElementById('orderItem').value;
             const quantity = document.getElementById('quantity').value.trim();
-            const pickupDate = document.getElementById('pickupDate').value;
+            const pickupDateRaw = document.getElementById('pickupDate').value;
             const pickupTime = document.getElementById('pickupTime').value.trim();
             const notes = document.getElementById('extraNotes').value.trim();
+
+            // format date as DD-MM-YYYY (optional)
+            let pickupDate = "";
+            if (pickupDateRaw) {
+                const parts = pickupDateRaw.split("-"); // [YYYY, MM, DD]
+                if (parts.length === 3) {
+                    pickupDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
+                } else {
+                    pickupDate = pickupDateRaw; // fallback
+                }
+            }
 
             // Bakery WhatsApp number (no +, no spaces)
             const bakeryWhatsApp = "917593836666";
 
-            let message = `New order request from ${name}%0A`;
-            message += `Phone: ${phone}%0A`;
-            message += `Item: ${item}%0A`;
-            message += `Quantity/Weight: ${quantity}%0A`;
-            if (pickupDate || pickupTime) {
-                let dateTimeText = '';
+            let message = "";
+            message += `New order request from ${name}\n`;
+            message += `Phone: ${phone}\n`;
+            message += `Item: ${item}\n`;
+            message += `Quantity/Weight: ${quantity}\n`;
+
+            // Only add this line if date or time is set
+            if (pickupDate !== "" || pickupTime !== "") {
+                let dateTimeText = "";
                 if (pickupDate) {
                     dateTimeText += pickupDate;
                 }
                 if (pickupTime) {
-                    dateTimeText += (dateTimeText ? ' ' : '') + pickupTime;
+                    dateTimeText += (dateTimeText ? " " : "") + pickupTime;
                 }
-                message += `Preferred Date & Time: ${dateTimeText}%0A`;
+                message += `Preferred Date & Time: ${dateTimeText}\n`;
             }
-            if (notes) {
-                message += `Special Instructions: ${notes}%0A`;
-            }
-            message += `%0APlease confirm availability and price.`;
 
-            const url = `https://wa.me/${bakeryWhatsApp}?text=${message}`;
+            if (notes) {
+                message += `Special Instructions: ${notes}\n`;
+            }
+
+            message += `\nPlease confirm availability and price.`;
+
+            // Encode whole message safely
+            const encodedMessage = encodeURIComponent(message);
+            const url = `https://wa.me/${bakeryWhatsApp}?text=${encodedMessage}`;
             window.open(url, "_blank");
         });
     }
