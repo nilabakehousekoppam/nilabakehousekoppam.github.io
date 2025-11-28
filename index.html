@@ -607,8 +607,8 @@
     // Update footer year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Order form -> open WhatsApp with pre-filled message
     const orderForm = document.getElementById('orderForm');
+
     if (orderForm) {
         orderForm.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -618,32 +618,53 @@
             const item = document.getElementById('orderItem').value;
             const quantity = document.getElementById('quantity').value.trim();
 
-            // RAW values directly from inputs
-            const pickupDate = document.getElementById('pickupDate').value;  // e.g. 2025-11-30
-            const pickupTime = document.getElementById('pickupTime').value;  // e.g. 18:30
-
+            const pickupDate = document.getElementById('pickupDate').value;
+            const pickupTimeRaw = document.getElementById('pickupTime').value;
             const notes = document.getElementById('extraNotes').value.trim();
 
-            // Bakery WhatsApp number (no +, no spaces)
             const bakeryWhatsApp = "917593836666";
 
+            // ----------------------------
+            // MOBILE NUMBER VALIDATION
+            // ----------------------------
+            const phoneOnlyDigits = phone.replace(/\D/g, ""); // remove spaces or symbols
+
+            if (phoneOnlyDigits.length !== 10) {
+                alert("Please enter a valid 10-digit mobile number.");
+                return; // stop submission
+            }
+
+            // ----------------------------
+            // TIME → AM/PM conversion
+            // ----------------------------
+            let pickupTime = "";
+            if (pickupTimeRaw) {
+                let [hour, minute] = pickupTimeRaw.split(":");
+                hour = parseInt(hour);
+
+                let ampm = hour >= 12 ? "PM" : "AM";
+                let convertedHour = hour % 12 || 12;
+
+                pickupTime = `${convertedHour}:${minute} ${ampm}`;
+            }
+
+            // ----------------------------
+            // BUILD MESSAGE
+            // ----------------------------
             let message = "";
             message += `New order request from ${name}\n`;
-            message += `Phone: ${phone}\n`;
+            message += `Phone: ${phoneOnlyDigits}\n`;
             message += `Item: ${item}\n`;
             message += `Quantity/Weight: ${quantity}\n`;
 
-            // Always show the line; if empty, show "Not specified"
+            // Date & time line
             let dateTimeText = "Not specified";
             if (pickupDate || pickupTime) {
                 dateTimeText = "";
-                if (pickupDate) {
-                    dateTimeText += pickupDate; // keep raw, no formatting
-                }
-                if (pickupTime) {
-                    dateTimeText += (dateTimeText ? " " : "") + pickupTime;
-                }
+                if (pickupDate) dateTimeText += pickupDate;
+                if (pickupTime) dateTimeText += (dateTimeText ? " " : "") + pickupTime;
             }
+
             message += `Preferred Date & Time: ${dateTimeText}\n`;
 
             if (notes) {
@@ -652,16 +673,13 @@
 
             message += `\nPlease confirm availability and price.`;
 
-            // Show what we are actually sending (for debugging)
-            alert(message);
-
             const encodedMessage = encodeURIComponent(message);
             const url = `https://wa.me/${bakeryWhatsApp}?text=${encodedMessage}`;
+
             window.open(url, "_blank");
         });
     }
 </script>
-
 
 <!--
 REMINDERS:
