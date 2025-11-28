@@ -617,20 +617,12 @@
             const phone = document.getElementById('customerPhone').value.trim();
             const item = document.getElementById('orderItem').value;
             const quantity = document.getElementById('quantity').value.trim();
-            const pickupDateRaw = document.getElementById('pickupDate').value;
-            const pickupTime = document.getElementById('pickupTime').value.trim();
-            const notes = document.getElementById('extraNotes').value.trim();
 
-            // format date as DD-MM-YYYY (optional)
-            let pickupDate = "";
-            if (pickupDateRaw) {
-                const parts = pickupDateRaw.split("-"); // [YYYY, MM, DD]
-                if (parts.length === 3) {
-                    pickupDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
-                } else {
-                    pickupDate = pickupDateRaw; // fallback
-                }
-            }
+            // RAW values directly from inputs
+            const pickupDate = document.getElementById('pickupDate').value;  // e.g. 2025-11-30
+            const pickupTime = document.getElementById('pickupTime').value;  // e.g. 18:30
+
+            const notes = document.getElementById('extraNotes').value.trim();
 
             // Bakery WhatsApp number (no +, no spaces)
             const bakeryWhatsApp = "917593836666";
@@ -641,17 +633,18 @@
             message += `Item: ${item}\n`;
             message += `Quantity/Weight: ${quantity}\n`;
 
-            // Only add this line if date or time is set
-            if (pickupDate !== "" || pickupTime !== "") {
-                let dateTimeText = "";
+            // Always show the line; if empty, show "Not specified"
+            let dateTimeText = "Not specified";
+            if (pickupDate || pickupTime) {
+                dateTimeText = "";
                 if (pickupDate) {
-                    dateTimeText += pickupDate;
+                    dateTimeText += pickupDate; // keep raw, no formatting
                 }
                 if (pickupTime) {
                     dateTimeText += (dateTimeText ? " " : "") + pickupTime;
                 }
-                message += `Preferred Date & Time: ${dateTimeText}\n`;
             }
+            message += `Preferred Date & Time: ${dateTimeText}\n`;
 
             if (notes) {
                 message += `Special Instructions: ${notes}\n`;
@@ -659,13 +652,16 @@
 
             message += `\nPlease confirm availability and price.`;
 
-            // Encode whole message safely
+            // Show what we are actually sending (for debugging)
+            alert(message);
+
             const encodedMessage = encodeURIComponent(message);
             const url = `https://wa.me/${bakeryWhatsApp}?text=${encodedMessage}`;
             window.open(url, "_blank");
         });
     }
 </script>
+
 
 <!--
 REMINDERS:
