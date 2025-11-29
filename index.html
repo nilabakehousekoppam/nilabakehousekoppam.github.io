@@ -82,6 +82,7 @@
                 display: none !important;
             }
         }
+
         /* Sections */
         section {
             scroll-margin-top: 90px; /* for smooth anchor scrolling */
@@ -177,7 +178,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="#home">
-            <!-- Logo image -->
             <img src="assets/images/nila-logo.png" alt="Nila Bake House Logo">
             <span class="brand-title">Nila Bake House</span>
         </a>
@@ -216,7 +216,6 @@
                     <a href="#order" class="btn btn-primary px-4">
                         <i class="bi bi-bag-heart me-1"></i> Place an Order
                     </a>
-                    <!-- WhatsApp quick chat button in hero -->
                     <a href="https://wa.me/917593836666" target="_blank" class="btn btn-outline-primary px-4">
                         <i class="bi bi-whatsapp me-1"></i> Chat on WhatsApp
                     </a>
@@ -227,7 +226,6 @@
                 </div>
             </div>
             <div class="col-md-6 text-center">
-                <!-- Replace this with your own hero cake image if you have one -->
                 <img src="assets/cake/black-forest.png"
                      alt="Signature Cake" class="img-fluid hero-image rounded-4 shadow-sm bg-white">
             </div>
@@ -281,19 +279,7 @@
                         <label for="orderItem" class="form-label">What would you like to order?</label>
                         <select id="orderItem" class="form-select" required>
                             <option value="" selected disabled>Select an item</option>
-                            <option value="Black Forest">Black Forest</option>
-                            <option value="White Forest">White Forest</option>
-                            <option value="Red Velvet">Red Velvet</option>
-                            <option value="Vancho">Vancho</option>
-                            <option value="Butter Scotch">Butter Scotch</option>
-                            <option value="Honey Cake">Honey Cake</option>
-                            <option value="Nutty Bubly">Nutty Bubly</option>
-                            <option value="Pista Cake">Pista Cake</option>
-                            <option value="Strawberry Cake">Strawberry Cake</option>
-                            <option value="Mango Cake">Mango Cake</option>
-                            <option value="Pineapple Cake">Pineapple Cake</option>
-                            <option value="Chocolate Cake">Chocolate Cake</option>
-                            <option value="Custom Cake">Custom Cake (theme / photo etc.)</option>
+                            <!-- Cake options will be added from cakes.csv -->
                         </select>
                     </div>
                     <div class="mb-3">
@@ -404,7 +390,6 @@
             </p>
         </div>
         <div class="row g-4">
-            <!-- Contact (Left) -->
             <div class="col-md-6 col-lg-5">
                 <div class="bg-white p-4 rounded-4 shadow-sm h-100">
                     <h5 class="mb-3"><i class="bi bi-telephone me-2"></i>Contact</h5>
@@ -417,17 +402,17 @@
                         <a href="mailto:nilabakehousekoppam@gmail.com">nilabakehousekoppam@gmail.com</a>
                     </p>
                     <p class="mb-0"><strong>Instagram:</strong> @nilabakehousekoppam</p>
-        
+
                     <hr class="my-4">
-        
+
                     <h5 class="mb-3"><i class="bi bi-geo-alt me-2"></i>Address</h5>
                     <p class="mb-1">Nila Bake House</p>
                     <p class="mb-1">Koppam</p>
                     <p class="mb-1">Kerala, India</p>
                     <p class="mb-0">PIN 679 307</p>
-        
+
                     <hr class="my-4">
-        
+
                     <h6 class="mb-1">Timings</h6>
                     <p class="mb-0 small text-muted">
                         Mon – Sun: 9:00 AM – 9:00 PM  
@@ -435,8 +420,7 @@
                     </p>
                 </div>
             </div>
-        
-            <!-- Map (Right) -->
+
             <div class="col-md-6 col-lg-7">
                 <div class="h-100 rounded-4 overflow-hidden shadow-sm bg-white">
                     <iframe
@@ -475,15 +459,19 @@
 
 <!-- Bootstrap JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-    // Load cake data from CSV and render cards
+    // Load cake data from CSV and render cards + dropdown
     document.addEventListener("DOMContentLoaded", function () {
         const cakeListEl = document.getElementById("cake-list");
         const orderItemSelect = document.getElementById("orderItem");
 
         if (!cakeListEl) return;
 
-        fetch("assets/data/cakes.csv")
+        // Cache-buster so browser always gets latest CSV
+        const csvUrl = "assets/data/cakes.csv?_=" + Date.now();
+
+        fetch(csvUrl)
             .then(function (response) {
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
@@ -501,11 +489,9 @@
                     return;
                 }
 
-                const header = lines[0].split(",");
-                // We expect: name,price,description,image
-                cakeListEl.innerHTML = ""; // clear "Loading..." text
+                cakeListEl.innerHTML = "";
 
-                // Clear existing <option>s except the first "Select an item"
+                // Keep the first "Select an item" option, clear the rest
                 if (orderItemSelect) {
                     const firstOption = orderItemSelect.querySelector("option");
                     orderItemSelect.innerHTML = "";
@@ -514,16 +500,22 @@
                     }
                 }
 
+                // Start from 1 to skip header row
                 for (let i = 1; i < lines.length; i++) {
-                    const parts = lines[i].split(",");
+                    const rawLine = lines[i];
+                    if (!rawLine.trim()) continue;
+
+                    const parts = rawLine.split(",");
                     if (parts.length < 4) continue;
 
                     const name = parts[0].trim();
                     const price = parts[1].trim();
-                    const description = parts[2].trim();
-                    const image = parts[3].trim();
+                    const image = parts[parts.length - 1].trim();
+                    const description = parts.slice(2, parts.length - 1).join(",").trim();
 
-                    // Create card
+                    if (!name) continue;
+
+                    // Create cake card
                     const col = document.createElement("div");
                     col.className = "col-md-4";
 
@@ -543,7 +535,7 @@
                     `;
                     cakeListEl.appendChild(col);
 
-                    // Also add to order dropdown
+                    // Add to order dropdown
                     if (orderItemSelect) {
                         const opt = document.createElement("option");
                         opt.value = name;
@@ -570,6 +562,7 @@
             });
     });
 </script>
+
 <script>
     // Update footer year
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -591,23 +584,18 @@
 
             const bakeryWhatsApp = "917593836666";
 
-            // ----------------------------
-            // MOBILE NUMBER VALIDATION
-            // ----------------------------
-            const phoneOnlyDigits = phone.replace(/\D/g, ""); // remove spaces or symbols
-
+            // MOBILE NUMBER VALIDATION – must be 10 digits
+            const phoneOnlyDigits = phone.replace(/\D/g, "");
             if (phoneOnlyDigits.length !== 10) {
                 alert("Please enter a valid 10-digit mobile number.");
-                return; // stop submission
+                return;
             }
 
-            // ----------------------------
             // TIME → AM/PM conversion
-            // ----------------------------
             let pickupTime = "";
             if (pickupTimeRaw) {
                 let [hour, minute] = pickupTimeRaw.split(":");
-                hour = parseInt(hour);
+                hour = parseInt(hour, 10);
 
                 let ampm = hour >= 12 ? "PM" : "AM";
                 let convertedHour = hour % 12 || 12;
@@ -615,16 +603,13 @@
                 pickupTime = `${convertedHour}:${minute} ${ampm}`;
             }
 
-            // ----------------------------
             // BUILD MESSAGE
-            // ----------------------------
             let message = "";
             message += `New order request from ${name}\n`;
             message += `Phone: ${phoneOnlyDigits}\n`;
             message += `Item: ${item}\n`;
             message += `Quantity/Weight: ${quantity}\n`;
 
-            // Date & time line
             let dateTimeText = "Not specified";
             if (pickupDate || pickupTime) {
                 dateTimeText = "";
@@ -651,10 +636,7 @@
 <!--
 REMINDERS:
 1. Put your logo at: assets/images/nila-logo.png
-2. Put cake images in: assets/cake/ with the filenames used above
-   (black-forest.png, white-forest.png, red-velvet.png, vancho.png, butterscotch.png,
-    honey-cake.png, nutty-bubly.png, pista.png, strawberry.png, mango.png,
-    pineapple.png, chocolate.png) or adjust src paths to match.
+2. Put cake images in: assets/cake/ with the filenames used above.
 -->
 
 </body>
